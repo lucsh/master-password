@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Secure Password Generator</title>
+
+  <style>
+    body {
+      font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
+      color: rgb(40, 40, 34);
+      font-size: large;
+    }
+
+    ::selection {
+      background:  rgb(40, 40, 34);
+      color:whitesmoke;
+    }
+    ::-moz-selection {
+      background:  rgb(40, 40, 34);
+      color:whitesmoke;
+      
+    }
+
+    hr {
+      border-bottom: 1px solid lightgrey;
+    }
+
+    input {
+      font-size: x-large;
+      font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
+      
+    }
+    table{
+      width: 100%;
+    }
+
+    td{
+      width: 50%;
+      padding: 5px 0;
+    }
+    .container{
+      max-width: 1024px;
+    }
+
+    .show{
+      color : rgb(100, 100, 94);
+      content: content: " ↓";
+    }
+
+    .eye {
+      display: inline;
+      margin-left: -40px;
+      padding: 10px;
+      font-size: x-large;
+      color: rgb(40, 40, 34);
+      cursor: pointer;
+    }
+
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      box-sizing: border-box
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    @media (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+  <form class="form row">
+    <div class="column">
+      <label for="master">user: </label>
+      <input type="text" name="user">
+    </div>
+
+    <div class="column">
+      <label for="password">psw: </label>
+      <input type="password" name="master">
+      <div class="eye">&#9679;</div>
+    </div>
+
+  </form>
+  <hr>
+  <table class="sitios">
+    <tr>
+      <td class="sitio"></td>
+      <td class="password"></td>
+    </tr>
+  </table>
+</div>
+</body>
+
+<script src="forge-sha256.js"></script>
+<script src="script.js"></script>
+
+</html>
