@@ -48,7 +48,7 @@ function getPass(service) {
     const specialChars = '{!#$%&()*+,-./:;<=>?@[{}]^_| ~}';
 
     const index = Math.round((vocales.length / 100) * specialChars.length);
-    prepass = prepass.slice(0, passLenght / 3) + specialChars[index] + prepass.slice(passLenght / 3, passLenght * 2 / 3) + specialChars[index + 2] + prepass.slice(passLenght * 2 / 3, passLenght);
+    prepass = prepass.slice(0, passLenght / 3) + specialChars[index] + prepass.slice(passLenght / 3, (passLenght * 2) / 3) + specialChars[index + 2] + prepass.slice((passLenght * 2) / 3, passLenght);
     return prepass.slice(1, passLenght + 1);
   } return '';
 }
@@ -57,7 +57,7 @@ function populateList() {
   tabla.innerHTML = sitios.map((sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="sitio.url">${sitio.displayName}</a> </td>
         <td class="password">${(getPass(sitio.service))}</td></tr>
-      
+
           `).join('');
 }
 
