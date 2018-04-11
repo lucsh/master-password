@@ -91,6 +91,7 @@ eye.addEventListener('touchend', hidePassword);
 
 // Event delegation porque la populo despues
 tabla.addEventListener('click', selectAll);
+tabla.addEventListener('touchstart', selectAll);
 
 populateList();
 
