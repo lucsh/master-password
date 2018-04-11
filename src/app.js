@@ -43,7 +43,7 @@ const newPass = document.querySelector('.new-pass');
 
 function getPass(service) {
   if (user.value && password.value) {
-    const usuario = (user.value).toLower;
+    const usuario = (user.value).toLowerCase();
     let prepass = forge_sha256(`${password.value}/${usuario}@${service}`);
 
     const vocales = prepass.match(/[aeiou]/gi);
