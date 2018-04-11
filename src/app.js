@@ -57,9 +57,9 @@ function populateList() {
   tabla.innerHTML = sitios.map((sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="sitio.url">${sitio.displayName}</a> </td>
         <td class="password">${(getPass(sitio.service))}</td></tr>
-
           `).join('');
 }
+
 
 function selectAll(e) {
   // Filtro los clicks para que solo funcione en password
@@ -70,11 +70,13 @@ function selectAll(e) {
 
 function showPassword() {
   password.type = 'text';
-  this.innerHTML = '&#9675;';
+  this.innerHTML = '&#9679;';
+  this.classList.toggle('show');
 }
 
 function hidePassword() {
   password.type = 'password';
+  this.innerHTML = '&#9675;';
   this.classList.toggle('show');
 }
 
@@ -83,6 +85,8 @@ user.addEventListener('change', populateList);
 form.addEventListener('submit', e => e.preventDefault());
 eye.addEventListener('mousedown', showPassword);
 eye.addEventListener('mouseup', hidePassword);
+eye.addEventListener('touchstart', showPassword);
+eye.addEventListener('touchend', hidePassword);
 
 
 // Event delegation porque la populo despues
