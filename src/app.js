@@ -42,6 +42,8 @@ const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('input[name="new-pass"]');
 
 function getPass(service) {
+  let contrasena = '';
+
   if (user.value && password.value) {
     const len = passLenght.value;
     const usuario = (user.value).toLowerCase();
@@ -55,10 +57,12 @@ function getPass(service) {
       const index = Math.round((vocales.length / 100) * syms.length);
 
       prepass = prepass.slice(0, len / 3) + syms[index] + prepass.slice(len / 3, (len * 2) / 3) + syms[index + 2] + prepass.slice((len * 2) / 3, len);
-      return prepass.slice(1, len);
+      contrasena = prepass.slice(0, len);
+    } else {
+      contrasena = prepass.slice(0, len);
     }
-    return prepass.slice(0, len + 1);
-  } return '';
+  }
+  return contrasena;
 }
 
 function getNewPass() {
