@@ -35,23 +35,29 @@ const forms = document.querySelectorAll('.form');
 const user = document.querySelector('input[name="user"]');
 const password = document.querySelector('input[name="master"]');
 const tabla = document.querySelector('.sitios');
-const passLenght = document.querySelector('input[name="length"]') || 14;
+const passLenght = document.querySelector('input[name="lenght"]');
+const useSymbols = document.querySelector('input[name="symbols"]');
 const eye = document.querySelector('.eye');
 const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('.new-pass');
 
 function getPass(service) {
   if (user.value && password.value) {
+    const len = passLenght.value;
     const usuario = (user.value).toLowerCase();
     let prepass = forge_sha256(`${password.value}/${usuario}@${service}`);
 
-    const vocales = prepass.match(/[aeiou]/gi);
+    if (useSymbols.checked) {
+      const vocales = prepass.match(/[aeiou]/gi);
 
-    const specialChars = '{!#$%&()*+,-./:;<=>?@[{}]^_| ~}';
+      const syms = '{!#$%&()*+,-./:;<=>?@[{}]^_| ~}';
 
-    const index = Math.round((vocales.length / 100) * specialChars.length);
-    prepass = prepass.slice(0, passLenght / 3) + specialChars[index] + prepass.slice(passLenght / 3, (passLenght * 2) / 3) + specialChars[index + 2] + prepass.slice((passLenght * 2) / 3, passLenght);
-    return prepass.slice(1, passLenght + 1);
+      const index = Math.round((vocales.length / 100) * syms.length);
+
+      prepass = prepass.slice(0, len / 3) + syms[index] + prepass.slice(len / 3, (len * 2) / 3) + syms[index + 2] + prepass.slice((len * 2) / 3, len);
+      return prepass.slice(1, len);
+    }
+    return prepass.slice(0, len + 1);
   } return '';
 }
 
@@ -88,6 +94,8 @@ function hidePassword() {
 
 password.addEventListener('change', populateList);
 user.addEventListener('change', populateList);
+useSymbols.addEventListener('change', populateList);
+passLenght.addEventListener('change', populateList);
 
 forms.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
 eye.addEventListener('mousedown', showPassword);
@@ -104,4 +112,3 @@ newPass.addEventListener('click', selectAll);
 newPass.addEventListener('touchstart', selectAll);
 
 populateList();
-
