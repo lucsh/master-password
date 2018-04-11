@@ -47,7 +47,7 @@
     input {
       font-size: x-large;
       font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
-      width: 250px;
+      max-width: 250px;
     }
     table{
       width: 100%;
@@ -61,8 +61,9 @@
       max-width: 1024px;
     }
 
-    .font-large{
+    .custom-service{
       font-size: large;
+      width: 90%;
     }
     .show{
       color : rgb(100, 100, 94);
@@ -117,7 +118,7 @@
   <hr>
   <form class="form row">
     <div class="column">
-      <input class="font-large" type="text" name="new-serv" placeholder="Custom Service">
+      <input class="custom-service" type="text" name="new-serv" placeholder="Custom Service">
     </div>
 
     <div class="column">
