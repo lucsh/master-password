@@ -76,7 +76,6 @@
     .column {
       float: left;
       width: 50%;
-      padding: 10px;
       box-sizing: border-box
     }
 
@@ -84,6 +83,9 @@
       content: "";
       display: table;
       clear: both;
+    }
+    .padding-10{
+      padding: 10px;
     }
 
     @media (max-width: 600px) {
@@ -97,12 +99,12 @@
 <body>
   <div class="container">
   <form class="form row">
-    <div class="column">
+    <div class="column padding-10">
       <label for="user">usr: </label>
       <input type="text" name="user">
     </div>
 
-    <div class="column">
+    <div class="column padding-10">
       <label for="password">psw: </label>
       <input type="password" name="master">
       <div class="eye">&#9675;</div>
@@ -110,12 +112,22 @@
 
   </form>
   <hr>
+  <form class="form row">
+    <div class="column">
+      <input type="text" name="new-serv">
+    </div>
+
+    <div class="column">
+      <div class="new-pass"></div>
+    </div>
+  </form>
   <table class="sitios">
     <tr>
       <td class="sitio"></td>
       <td class="password"></td>
     </tr>
   </table>
+
 </div>
 </body>
 

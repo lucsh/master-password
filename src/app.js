@@ -31,12 +31,15 @@ const sitios = [
   { service: 'yahoo', url: 'https://login.yahoo.com/', displayName: 'Yahoo' },
 ];
 
-const form = document.querySelector('.form');
+const forms = document.querySelectorAll('.form');
 const user = document.querySelector('input[name="user"]');
 const password = document.querySelector('input[name="master"]');
 const tabla = document.querySelector('.sitios');
 const passLenght = document.querySelector('input[name="length"]') || 14;
 const eye = document.querySelector('.eye');
+
+const newServ = document.querySelector('input[name="new-serv"]');
+const newPass = document.querySelector('.new-pass');
 
 function getPass(service) {
   if (user.value && password.value) {
@@ -53,11 +56,16 @@ function getPass(service) {
   } return '';
 }
 
+function getNewPass() {
+  newPass.innerHTML = getPass(newServ.value);
+}
+
 function populateList() {
   tabla.innerHTML = sitios.map((sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="sitio.url">${sitio.displayName}</a> </td>
         <td class="password">${(getPass(sitio.service))}</td></tr>
           `).join('');
+  getNewPass();
 }
 
 
@@ -82,11 +90,15 @@ function hidePassword() {
 
 password.addEventListener('change', populateList);
 user.addEventListener('change', populateList);
-form.addEventListener('submit', e => e.preventDefault());
+
+
+forms.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
 eye.addEventListener('mousedown', showPassword);
 eye.addEventListener('mouseup', hidePassword);
 eye.addEventListener('touchstart', showPassword);
 eye.addEventListener('touchend', hidePassword);
+
+newServ.addEventListener('change', getNewPass);
 
 
 // Event delegation porque la populo despues
