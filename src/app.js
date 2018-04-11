@@ -37,7 +37,6 @@ const password = document.querySelector('input[name="master"]');
 const tabla = document.querySelector('.sitios');
 const passLenght = document.querySelector('input[name="length"]') || 14;
 const eye = document.querySelector('.eye');
-
 const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('.new-pass');
 
@@ -72,7 +71,6 @@ function populateList() {
 function selectAll(e) {
   // Filtro los clicks para que solo funcione en password
   if (!e.target.className === 'password') return;
-
   window.getSelection().selectAllChildren(e.target);
 }
 
@@ -91,7 +89,6 @@ function hidePassword() {
 password.addEventListener('change', populateList);
 user.addEventListener('change', populateList);
 
-
 forms.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
 eye.addEventListener('mousedown', showPassword);
 eye.addEventListener('mouseup', hidePassword);
@@ -99,11 +96,12 @@ eye.addEventListener('touchstart', showPassword);
 eye.addEventListener('touchend', hidePassword);
 
 newServ.addEventListener('change', getNewPass);
-
-
 // Event delegation porque la populo despues
 tabla.addEventListener('click', selectAll);
 tabla.addEventListener('touchstart', selectAll);
+
+newPass.addEventListener('click', selectAll);
+newPass.addEventListener('touchstart', selectAll);
 
 populateList();
 
