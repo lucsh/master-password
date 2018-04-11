@@ -2,6 +2,7 @@ const path = require('path'),
   webpack = require('webpack'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
   ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractPlugin = new ExtractTextPlugin({ filename: './assets/css/app.css' });
@@ -67,6 +68,9 @@ const config = {
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
+    new CopyWebpackPlugin([
+      { from: 'assets/favicon', to: './' }
+    ]),
     // extract-text-webpack-plugin instance
     extractPlugin,
   ],
