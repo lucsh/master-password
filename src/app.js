@@ -71,7 +71,7 @@ function getNewPass() {
 
 function populateList() {
   tabla.innerHTML = sitios.map((sitio, i) => `
-        <tr id="${i}"><td class="sitio"><a href="sitio.url">${sitio.displayName}</a> </td>
+        <tr id="${i}"><td class="sitio"><a href="${sitio.url}">${sitio.displayName}</a> </td>
         <td class="password"><input type="text" class="password-input" value="${(getPass(sitio.service))}" onClick="this.select();"></td></tr>
           `).join('');
   getNewPass();
