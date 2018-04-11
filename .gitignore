@@ -112,3 +112,5 @@ lib/
 data/
 
 package-lock\.json
+
+dist/
