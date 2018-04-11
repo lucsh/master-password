@@ -48,6 +48,8 @@
       font-size: x-large;
       font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
       max-width: 250px;
+      border: 0;
+      border-bottom: solid 1px rgb(40, 40, 34);
     }
     table{
       width: 100%;
@@ -57,10 +59,29 @@
       width: 50%;
       padding: 5px 0;
     }
+    input,
+    textarea,
+    select {
+        outline: 0;
+    }
+
+    input:hover,
+    textarea:hover,
+    input:focus,
+    textarea:focus {
+        border-bottom: solid 2px rgb(100, 100, 94);
+        margin-bottom: -1px;
+
+    }
+
+    table.sitios>tr{
+      min-height: 30px;
+    }
     .container{
       max-width: 1024px;
     }
 
+    .password-input,
     .custom-service{
       font-size: large;
       width: 90%;
@@ -102,7 +123,8 @@
 
 <body>
   <div class="container">
-  <form class="form row">
+  <form class="form">
+<div class="row">
     <div class="column response padding-10">
       <label for="user">usr: </label>
       <input type="text" name="user" placeholder="user@email.com">
@@ -113,7 +135,8 @@
       <input type="password" name="master" placeholder="password">
       <div class="eye">&#9675;</div>
     </div>
-
+  </div>
+  <div class="row">
     <div class="column response padding-10">
       <label for="lenght">len: </label>
       <input value="15" type="text" name="lenght" placeholder="lenght">
@@ -123,7 +146,7 @@
       <label for="symbols">use symbols? </label>
       <input type="checkbox" name="symbols" checked>
     </div>
-
+  </div>
   </form>
   <hr>
   <form class="form row">
@@ -132,7 +155,7 @@
     </div>
 
     <div class="column">
-      <div class="new-pass password"></div>
+        <input type="text" class="password-input" name="new-pass" value="" onClick="this.select();">
     </div>
   </form>
   <table class="sitios">

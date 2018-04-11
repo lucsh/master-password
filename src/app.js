@@ -39,7 +39,7 @@ const passLenght = document.querySelector('input[name="lenght"]');
 const useSymbols = document.querySelector('input[name="symbols"]');
 const eye = document.querySelector('.eye');
 const newServ = document.querySelector('input[name="new-serv"]');
-const newPass = document.querySelector('.new-pass');
+const newPass = document.querySelector('input[name="new-pass"]');
 
 function getPass(service) {
   if (user.value && password.value) {
@@ -62,23 +62,17 @@ function getPass(service) {
 }
 
 function getNewPass() {
-  newPass.innerHTML = getPass(newServ.value);
+  newPass.value = newServ.value ? getPass(newServ.value) : '';
 }
 
 function populateList() {
   tabla.innerHTML = sitios.map((sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="sitio.url">${sitio.displayName}</a> </td>
-        <td class="password">${(getPass(sitio.service))}</td></tr>
+        <td class="password"><input type="text" class="password-input" value="${(getPass(sitio.service))}" onClick="this.select();"></td></tr>
           `).join('');
   getNewPass();
 }
 
-
-function selectAll(e) {
-  // Filtro los clicks para que solo funcione en password
-  if (!e.target.className === 'password') return;
-  window.getSelection().selectAllChildren(e.target);
-}
 
 function showPassword() {
   password.type = 'text';
@@ -104,11 +98,5 @@ eye.addEventListener('touchstart', showPassword);
 eye.addEventListener('touchend', hidePassword);
 
 newServ.addEventListener('change', getNewPass);
-// Event delegation porque la populo despues
-tabla.addEventListener('click', selectAll);
-tabla.addEventListener('touchstart', selectAll);
-
-newPass.addEventListener('click', selectAll);
-newPass.addEventListener('touchstart', selectAll);
 
 populateList();
