@@ -69,7 +69,7 @@ const config = {
       template: 'index.html',
     }),
     new CopyWebpackPlugin([
-      { from: 'assets/favicon', to: './' }
+      { from: 'assets/favicon', to: './' },
     ]),
     // extract-text-webpack-plugin instance
     extractPlugin,
@@ -85,7 +85,7 @@ const config = {
     open: true,
   },
 
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
 
 };
 
