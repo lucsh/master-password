@@ -78,13 +78,24 @@
     textarea:hover,
     input:focus,
     textarea:focus {
-      border-bottom: solid 2px rgb(100, 100, 94);
+      border-bottom: solid 2px rgb(40, 40, 34);
       margin-bottom: -1px;
 
     }
+    table{
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 0;
+    }
 
-    table.sitios>tr {
+    table.sitios tr {
       min-height: 30px;
+    }
+
+    tr:hover,
+    tr:hover input {
+      background-color:  whitesmoke;
     }
 
     .container {
@@ -177,11 +188,11 @@
 
         <div class="column response padding-10">
           <div class="column">
-            <label for="symbols">use symbols? </label>
+            <label for="symbols">use symbols?</label>
             <input type="checkbox" name="symbols" checked>
           </div>
           <div class="column">
-            <label for="caps">use caps? </label>
+            <label for="caps">use caps?</label>
             <input type="checkbox" name="caps" checked>
           </div>
         </div>
