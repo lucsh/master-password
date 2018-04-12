@@ -12,7 +12,7 @@ import './assets/js/forge-sha256';
  */
 
 const sitios = [
-  { service: 'cpanel', url: 'localhost', displayName: 'cPanel' },
+  { service: 'cpanel', url: '', displayName: 'cPanel' },
   { service: 'github', url: 'https://github.com/github', displayName: 'GitHub' },
   { service: 'bitbucket', url: 'https://bitbucket.org/account/signin/', displayName: 'Bitbucket' },
   { service: 'amazon', url: 'https://www.amazon.com/', displayName: 'Amazon' },
