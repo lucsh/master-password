@@ -36,8 +36,9 @@ const user = document.querySelector('input[name="user"]');
 const password = document.querySelector('input[name="master"]');
 const tabla = document.querySelector('.sitios');
 const passLenght = document.querySelector('input[name="lenght"]');
-const useSymbols = document.querySelector('input[name="symbols"]');
 const eye = document.querySelector('.eye');
+const useSymbols = document.querySelector('input[name="symbols"]');
+const useCaps = document.querySelector('input[name="caps"]');
 const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('input[name="new-pass"]');
 
@@ -57,10 +58,11 @@ function getPass(service) {
       const index = Math.round((vocales.length / 100) * syms.length);
 
       prepass = prepass.slice(0, len / 3) + syms[index] + prepass.slice(len / 3, (len * 2) / 3) + syms[index + 2] + prepass.slice((len * 2) / 3, len);
-      contrasena = prepass.slice(0, len);
-    } else {
-      contrasena = prepass.slice(0, len);
     }
+    if (useCaps.checked) {
+      prepass = prepass.slice(0, len / 3) + (prepass.slice(len / 3, (len * 2) / 3)).toUpperCase() + prepass.slice((len * 2) / 3, len);
+    }
+    contrasena = prepass.slice(0, len);
   }
   return contrasena;
 }
@@ -93,6 +95,7 @@ function hidePassword() {
 password.addEventListener('change', populateList);
 user.addEventListener('change', populateList);
 useSymbols.addEventListener('change', populateList);
+useCaps.addEventListener('change', populateList);
 passLenght.addEventListener('change', populateList);
 
 forms.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
