@@ -70,6 +70,7 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: 'assets/favicon', to: './' },
+      { from: 'assets/htaccess', to: './.htaccess', toType: 'file' },
     ]),
     // extract-text-webpack-plugin instance
     extractPlugin,
