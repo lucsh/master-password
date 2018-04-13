@@ -3,7 +3,8 @@ const path = require('path'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
-  ExtractTextPlugin = require('extract-text-webpack-plugin');
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const extractPlugin = new ExtractTextPlugin({ filename: './assets/css/app.css' });
 
@@ -65,11 +66,37 @@ const config = {
   plugins: [
     // cleaning up only 'dist' folder
     new CleanWebpackPlugin(['dist']),
+    new FaviconsWebpackPlugin({
+      // Your source logo
+      logo: './assets/logo/logo.png',
+      // Generate a cache file with control hashes and
+      // don't rebuild the favicons until those hashes change
+      persistentCache: true,
+      // Inject the html into the html-webpack-plugin
+      inject: true,
+      // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
+      background: '#fff',
+      // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
+      title: 'Secure Password Generator',
+
+      // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: true,
+        twitter: true,
+        yandex: false,
+        windows: true,
+      }
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
     new CopyWebpackPlugin([
-      { from: 'assets/favicon', to: './' },
       { from: 'assets/htaccess', to: './.htaccess', toType: 'file' },
     ]),
     // extract-text-webpack-plugin instance
