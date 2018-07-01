@@ -14,7 +14,7 @@ const config = {
 
   entry: {
     // relative path declaration
-    app: './app.js',
+    script: './app.js',
   },
 
   output: {

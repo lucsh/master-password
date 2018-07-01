@@ -7,7 +7,7 @@
     "build": "./node_modules/.bin/webpack",
     "build:prod": "./node_modules/.bin/webpack -p",
     "watch": "./node_modules/.bin/webpack --watch",
-    "dev": "./node_modules/.bin/webpack-dev-server"
+    "dev": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0"
   },
   "author": "Lucas Del Pozzi",
   "license": "MIT",
