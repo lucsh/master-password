@@ -41,6 +41,8 @@ const useSymbols = document.querySelector('input[name="symbols"]');
 const useCaps = document.querySelector('input[name="caps"]');
 const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('input[name="new-pass"]');
+const btnTitle = document.querySelector('#btn_title');
+const contenido = document.querySelector('.contenido');
 
 if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
   document.body.classList.add('safari');
@@ -109,11 +111,27 @@ function hidePassword() {
   this.classList.toggle('show');
 }
 
+function sleep(ms = 0) {
+  return new Promise(r => setTimeout(r, ms));
+}
+function showContent() {
+  contenido.classList.toggle('visible');
+  contenido.classList.toggle('collapsed');
+  console.log('do it');
+
+  sleep(550).then(() => {
+    window.scroll({ top: 10000, left: 0, behavior: 'smooth' });
+    console.log('did');
+  });
+}
+
 password.addEventListener('change', populateList);
 user.addEventListener('change', populateList);
 useSymbols.addEventListener('change', populateList);
 useCaps.addEventListener('change', populateList);
 passLenght.addEventListener('change', populateList);
+
+btnTitle.addEventListener('mousedown', showContent);
 
 forms.forEach(form => form.addEventListener('submit', e => e.preventDefault()));
 eye.addEventListener('mousedown', showPassword);

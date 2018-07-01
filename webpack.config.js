@@ -9,7 +9,6 @@ const path = require('path'),
 const extractPlugin = new ExtractTextPlugin({ filename: './assets/css/app.css' });
 
 const config = {
-
   // absolute path for project root with the 'src' folder
   context: path.resolve(__dirname, 'src'),
 
@@ -26,10 +25,12 @@ const config = {
 
   module: {
     rules: [
-
       // babel-loader with 'env' preset
       {
-        test: /\.js$/, include: /src/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: ['env'] } },
+        test: /\.js$/,
+        include: /src/,
+        exclude: /node_modules/,
+        use: { loader: 'babel-loader', options: { presets: ['env'] } },
       },
       // html-loader
       { test: /\.html$/, use: ['html-loader'] },
@@ -56,10 +57,17 @@ const config = {
         }),
       },
       // file-loader(for images)
-      { test: /\.(jpg|png|gif|svg)$/, use: [{ loader: 'file-loader', options: { name: '[name].[ext]', outputPath: './assets/media/' } }] },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: '[name].[ext]', outputPath: './assets/media/' },
+          },
+        ],
+      },
       // file-loader(for fonts)
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ['file-loader'] },
-
     ],
   },
 
@@ -91,14 +99,12 @@ const config = {
         twitter: true,
         yandex: false,
         windows: true,
-      }
+      },
     }),
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
-    new CopyWebpackPlugin([
-      { from: 'assets/htaccess', to: './.htaccess', toType: 'file' },
-    ]),
+    new CopyWebpackPlugin([{ from: 'assets/htaccess', to: './.htaccess', toType: 'file' }]),
     // extract-text-webpack-plugin instance
     extractPlugin,
   ],
@@ -114,7 +120,6 @@ const config = {
   },
 
   // devtool: 'inline-source-map',
-
 };
 
 module.exports = config;

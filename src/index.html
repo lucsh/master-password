@@ -41,6 +41,7 @@
 
     .disclamer h1 {
       font-size: 0.9rem;
+      cursor: pointer;
     }
 
     .disclamer p {
@@ -65,6 +66,20 @@
 
     .disclamer a :visited {
       border-color: #f92672;
+    }
+
+
+    .disclamer .contenido {
+      overflow: hidden;
+      transition: all 500ms ease-in;
+    }
+
+    .disclamer .contenido.collapsed {
+      max-height: 0px;
+    }
+
+    .disclamer .contenido.visible {
+      max-height: 500px;
     }
 
     a {
@@ -167,7 +182,17 @@
     .password-input,
     .custom-service {
       width: 90%;
-      padding: 5px 0;
+      padding: 5px 0 5px 4px;
+    }
+
+    .password-input {
+      color: transparent;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .password-input:hover {
+      color: #292b2c;
+      text-shadow: none;
     }
 
     .show {
@@ -283,20 +308,22 @@
       </tr>
     </table>
 
-    <div class="disclamer">
-      <h1>Why?</h1>
-      <p>
-        Using the same password for multiple accounts is very
-        <span>unsafe</span>. If one of those sites gets compromisedit will affect all your accounts, possibly even leading to identity
-        theft.
-      </p>
-      <p>The idea behind this site it that you memorise just one, reasonably long, secure
-        <span>master password</span> and use it to generate a set of non-dictionary complex passwords. This password generator
-        works using JavaScript, entirely within the page and
-        <span>no data is ever passed back to my server</span>.</p>
-      <p>The code is in
-        <a href="https://github.com/lucasdp/master-password">GitHub</a>.
-      </p>
+    <div class="disclamer column response">
+      <h1 id="btn_title">Why?</h1>
+      <div class="contenido collapsed">
+        <p>
+          Using the same password for multiple accounts is very
+          <span>unsafe</span>. If one of those sites gets compromised it will affect all your accounts, possibly even leading to
+          identity theft.
+        </p>
+        <p>The idea behind this site it that you memorise just one, reasonably long, secure
+          <span>master password</span> and use it to generate a set of non-dictionary complex passwords. This password generator
+          works using JavaScript, entirely within the page and
+          <span>no data is ever passed back to my server</span>.</p>
+        <p>The code is in
+          <a href="https://github.com/lucsh/master-password">GitHub</a>.
+        </p>
+      </div>
     </div>
   </div>
 </body>
