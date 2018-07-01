@@ -8,38 +8,100 @@
   <title>Secure Password Generator</title>
   <style>
     body {
-      font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
-      color: rgb(40, 40, 34);
-      font-size: large;
+      font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      -webkit-font-smoothing: antialiased;
+      font-size: 1rem;
+      font-weight: normal;
+      line-height: 1.5;
+      color: #292b2c;
+      background-color: #fff;
     }
 
     ::selection {
-      background: rgb(40, 40, 34);
-      color: whitesmoke;
+      background: #292b2c;
+      color: #ddd;
     }
 
     ::-moz-selection {
-      background: rgb(40, 40, 34);
-      color: whitesmoke;
+      background: #292b2c;
+      color: #ddd;
 
     }
 
+    a:visited {
+      border-color: #f92672;
+    }
+
+    .disclamer {
+      width: 50%;
+      margin: 10px;
+      padding: 10px;
+      border-left: 4px solid #292b2c;
+    }
+
+    .disclamer h1 {
+      font-size: 0.9rem;
+    }
+
+    .disclamer p {
+      font-size: 0.8rem;
+    }
+
+    .disclamer span {
+      background: #292b2c;
+      color: #ddd;
+      padding: 1px;
+    }
+
+    .disclamer a {
+      text-decoration: none;
+      border: 0;
+      border-bottom: 2px solid #0773A7;
+      margin-left: 0;
+      padding: 0;
+      color: #292b2c;
+      background: none;
+    }
+
+    .disclamer a :visited {
+      border-color: #f92672;
+    }
+
+    a {
+      background: #292b2c;
+      border-left: 4px solid #0773A7;
+      color: #ddd;
+      margin-left: 10px;
+      padding: 10px;
+    }
+
+
     hr {
-      border-bottom: 1px solid lightgrey;
+      border: 0;
+      height: 1px;
+      background: #292b2c;
+    }
+
+    form {
+      margin-bottom: 5px;
     }
 
     input {
-      font-size: x-large;
+      font-size: 1rem;
       font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
+      font-weight: 100;
       max-width: 250px;
       border: 0;
-      border-bottom: solid 1px rgb(40, 40, 34);
+      border-bottom: solid 1px #292b2c;
       border-radius: 0;
     }
+
     label {
-      background: rgb(40, 40, 34);
-      color: whitesmoke;
-      padding: 4px 2px;
+      background: #292b2c;
+      border-left: 4px solid #ddd;
+      color: #ddd;
+      margin-left: 0px;
+      padding: 10px;
     }
 
     table {
@@ -57,18 +119,29 @@
       outline: 0;
     }
 
+    .safari .user-input:hover,
+    .safari input:hover,
+    .safari textarea:hover,
+    .safari input:focus,
+    .safari textarea:focus {
+      margin-bottom: 1px !important;
+    }
+
     input:hover,
     textarea:hover,
     input:focus,
     textarea:focus {
-      border-bottom: solid 2px rgb(40, 40, 34);
+      border-bottom: solid 2px #292b2c;
       margin-bottom: -1px;
-
     }
-    table{
+
+    table {
       border-collapse: collapse;
     }
-    table, th, td {
+
+    table,
+    th,
+    td {
       border: 0;
     }
 
@@ -78,33 +151,34 @@
 
     tr:hover,
     tr:hover input {
-      background-color:  whitesmoke;
+      background-color: #ddd;
     }
 
     .container {
       max-width: 1024px;
+      margin: 0 auto;
     }
 
+    .user-input,
     .master-input {
-      max-width: 230px;
+      max-width: 190px;
     }
 
     .password-input,
     .custom-service {
-      font-size: large;
       width: 90%;
       padding: 5px 0;
     }
 
     .show {
-      color: rgb(100, 100, 94);
+      color: #292b2c;
     }
 
     .eye {
       display: inline;
       padding: 10px;
       font-size: x-large;
-      color: rgb(40, 40, 34);
+      color: #292b2c;
       cursor: pointer;
     }
 
@@ -140,9 +214,20 @@
       padding: 10px;
     }
 
+    @media (max-width: 720px) {
+      .user-input,
+      .master-input {
+        max-width: 140px;
+      }
+    }
+
     @media (max-width: 600px) {
       .column.response {
         width: 100%;
+      }
+      .user-input,
+      .master-input {
+        max-width: 165px;
       }
     }
   </style>
@@ -154,7 +239,7 @@
       <div class="row">
         <div class="column response padding-10">
           <label for="user">usr:</label>
-          <input type="text" name="user" placeholder="user@email.com">
+          <input type="text" class="user-input" name="user" placeholder="user@email.com">
         </div>
 
         <div class="column response padding-10">
@@ -166,12 +251,12 @@
       <div class="row">
         <div class="column response padding-10">
           <label for="lenght">len:</label>
-          <input value="15" type="text" name="lenght" placeholder="lenght">
+          <input class="user-input" value="15" type="text" name="lenght" placeholder="lenght">
         </div>
 
         <div class="column response padding-10">
           <div class="column">
-            <label for="symbols">use symbols?</label>
+            <label for="symbols">use syms?</label>
             <input type="checkbox" name="symbols" checked>
           </div>
           <div class="column">
@@ -198,6 +283,21 @@
       </tr>
     </table>
 
+    <div class="disclamer">
+      <h1>Why?</h1>
+      <p>
+        Using the same password for multiple accounts is very
+        <span>unsafe</span>. If one of those sites gets compromisedit will affect all your accounts, possibly even leading to identity
+        theft.
+      </p>
+      <p>The idea behind this site it that you memorise just one, reasonably long, secure
+        <span>master password</span> and use it to generate a set of non-dictionary complex passwords. This password generator
+        works using JavaScript, entirely within the page and
+        <span>no data is ever passed back to my server</span>.</p>
+      <p>The code is in
+        <a href="https://github.com/lucasdp/master-password">GitHub</a>.
+      </p>
+    </div>
   </div>
 </body>
 

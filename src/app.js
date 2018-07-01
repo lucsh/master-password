@@ -42,12 +42,16 @@ const useCaps = document.querySelector('input[name="caps"]');
 const newServ = document.querySelector('input[name="new-serv"]');
 const newPass = document.querySelector('input[name="new-pass"]');
 
+if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
+  document.body.classList.add('safari');
+}
+
 function getPass(service) {
   let contrasena = '';
 
   if (user.value && password.value) {
     const len = passLenght.value;
-    const usuario = (user.value).toLowerCase();
+    const usuario = user.value.toLowerCase();
     let prepass = forge_sha256(`${password.value}/${usuario}@${service}`);
 
     if (useSymbols.checked) {
@@ -57,10 +61,18 @@ function getPass(service) {
 
       const index = Math.round((vocales.length / 100) * syms.length);
 
-      prepass = prepass.slice(0, len / 3) + syms[index] + prepass.slice(len / 3, (len * 2) / 3) + syms[index + 2] + prepass.slice((len * 2) / 3, len);
+      prepass =
+        prepass.slice(0, len / 3) +
+        syms[index] +
+        prepass.slice(len / 3, (len * 2) / 3) +
+        syms[index + 2] +
+        prepass.slice((len * 2) / 3, len);
     }
     if (useCaps.checked) {
-      prepass = prepass.slice(0, len / 3) + (prepass.slice(len / 3, (len * 2) / 3)).toUpperCase() + prepass.slice((len * 2) / 3, len);
+      prepass =
+        prepass.slice(0, len / 3) +
+        prepass.slice(len / 3, (len * 2) / 3).toUpperCase() +
+        prepass.slice((len * 2) / 3, len);
     }
     contrasena = prepass.slice(0, len);
   }
@@ -72,13 +84,18 @@ function getNewPass() {
 }
 
 function populateList() {
-  tabla.innerHTML = sitios.map((sitio, i) => `
+  tabla.innerHTML = sitios
+    .map(
+      (sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="${sitio.url}">${sitio.displayName}</a> </td>
-        <td class="password"><input type="text" class="password-input" value="${(getPass(sitio.service))}" onClick="this.select();"></td></tr>
-          `).join('');
+        <td class="password"><input type="text" class="password-input" value="${getPass(
+          sitio.service,
+        )}" onClick="this.select();"></td></tr>
+          `,
+    )
+    .join('');
   getNewPass();
 }
-
 
 function showPassword() {
   password.type = 'text';
