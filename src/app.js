@@ -44,7 +44,13 @@ const newPass = document.querySelector('input[name="new-pass"]');
 const btnTitle = document.querySelector('#btn_title');
 const contenido = document.querySelector('.contenido');
 
-if (navigator.userAgent.toLowerCase().indexOf('safari') !== -1) {
+
+const isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+let isSafari = navigator.userAgent.indexOf('Safari') > -1;
+
+if ((isChrome) && (isSafari)) { isSafari = false; }
+
+if (isSafari) {
   document.body.classList.add('safari');
 }
 
@@ -87,14 +93,10 @@ function getNewPass() {
 
 function populateList() {
   tabla.innerHTML = sitios
-    .map(
-      (sitio, i) => `
+    .map((sitio, i) => `
         <tr id="${i}"><td class="sitio"><a href="${sitio.url}">${sitio.displayName}</a> </td>
-        <td class="password"><input type="text" class="password-input" value="${getPass(
-          sitio.service,
-        )}" onClick="this.select();"></td></tr>
-          `,
-    )
+        <td class="password"><input type="text" class="password-input" value="${getPass(sitio.service)}" onClick="this.select();"></td></tr>
+          `,)
     .join('');
   getNewPass();
 }
