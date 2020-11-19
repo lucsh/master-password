@@ -1,0 +1,246 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+//*{
+//  border: 1px solid red;
+//}
+body {
+    font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #292b2c;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    border: 0;
+    border-bottom: 2px solid #0773a7;
+    margin-left: 0;
+    padding: 0;
+
+    background: none;
+}
+
+a :visited {
+    border-color: #f92672;
+}
+
+::selection {
+    background: #292b2c;
+    color: #ddd;
+}
+
+::-moz-selection {
+    background: #292b2c;
+    color: #ddd;
+}
+
+.disclamer {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 340px;
+    color: #ddd;
+
+    margin: 1em;
+    padding: 1em;
+    background: #292b2c;
+}
+
+.disclamer .caja {
+    position: relative;
+}
+
+.disclamer .caja:before,
+.disclamer .caja:after {
+    content: '';
+    display: block;
+    height: 16px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNC40IDE2Ij48ZyBmaWxsPSIjQ0NDIj48cGF0aCBkPSJNLjUgNi4zaDYuMnYxSC41di0xem0wIDIuOGg2LjJ2MUguNXYtMXpNNy44IDcuOEgxNHYxSDcuOHYtMXoiLz48L2c+PC9zdmc+')
+        0 50%;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.disclamer .caja-inner {
+    position: relative;
+    display: block;
+    padding: 0 14px 13px;
+}
+
+.disclamer .caja-inner:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    content: '';
+    display: block;
+    width: 14px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNC40IDE2Ij48cGF0aCBmaWxsPSIjQ0NDIiBkPSJNNC4zIDIuOHYxMmgtMXYtMTJoMXoiLz48L3N2Zz4=')
+        50% 0;
+}
+
+.disclamer .caja-inner:before,
+.disclamer .caja-inner:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    content: '';
+    display: block;
+    width: 14px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNC40IDE2Ij48cGF0aCBmaWxsPSIjQ0NDIiBkPSJNNC4zIDIuOHYxMmgtMXYtMTJoMXoiLz48L3N2Zz4=')
+        50% 0;
+}
+
+.disclamer .caja-inner:after {
+    right: -7px;
+}
+
+.disclamer .caja-inner:before {
+    left: -7px;
+}
+
+.disclamer h2 {
+    font-size: 0.9rem;
+}
+
+.disclamer {
+    font-size: 0.8rem;
+}
+
+.disclamer span {
+    background: #ddd;
+    color: #292b2c;
+    padding: 1px;
+}
+.disclamer a {
+    color: #ddd;
+}
+
+.content {
+    overflow: hidden;
+    transition: all 500ms ease-in;
+}
+
+.collapsed {
+    max-height: 0;
+}
+
+.visible {
+    max-height: 500px;
+}
+
+input {
+    font-size: 1rem;
+    font-family: Menlo, 'Bitstream Vera Sans', 'Courier New', courier, monospace;
+    font-weight: 100;
+    max-width: 250px;
+    border: 0;
+    border-bottom: solid 1px #292b2c;
+    border-radius: 0;
+    background: transparent;
+}
+
+label {
+    background: #292b2c;
+    color: #ddd;
+    padding: 10px;
+    min-width: 100px;
+    display: inline-block;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    width: 50%;
+    padding: 5px 0;
+}
+
+input,
+textarea,
+select {
+    outline: 0;
+}
+
+.safari .user-input:hover,
+.safari input:hover,
+.safari textarea:hover,
+.safari input:focus,
+.safari textarea:focus {
+    margin-bottom: 1px !important;
+}
+
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+    border-bottom: solid 2px #292b2c;
+    margin-bottom: -1px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 0;
+}
+
+table.sitios tr {
+    min-height: 30px;
+}
+
+tr:hover,
+tr:hover input {
+    background-color: #ddd;
+}
+
+.len-input {
+    max-width: 50px;
+}
+
+.password-input {
+    color: transparent;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.password-input:hover {
+    color: #292b2c;
+    text-shadow: none;
+}
+
+.show {
+    color: #292b2c;
+}
+
+#btn_setup {
+    display: inline;
+    color: #292b2c;
+    cursor: pointer;
+}
+
+#btn_close {
+    cursor: pointer;
+}
+
+.no-selection {
+    /* prevent selection */
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently supported by Chrome and Opera */
+}

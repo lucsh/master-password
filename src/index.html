@@ -1,331 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Secure Password</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="Description" content="A simple secure password generator" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Secure Password Generator</title>
-  <style>
-    body {
-      font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      -webkit-font-smoothing: antialiased;
-      font-size: 1rem;
-      font-weight: normal;
-      line-height: 1.5;
-      color: #292b2c;
-      background-color: #fff;
-    }
+        <!-- Open Graph data / Facebook Card data -->
+        <meta property="og:title" content="A simple secure password generator" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://pass.luc.sh" />
+<!--        <meta property="og:image" content="https://site.com/imageforfacebook.jpg" />-->
+<!--        <meta property="og:image:alt" content="an image to show on facebook links" />-->
+<!--        <meta property="og:description" content="A simple description" />-->
 
-    ::selection {
-      background: #292b2c;
-      color: #ddd;
-    }
+        <!-- Twitter Card data -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@closerluc" />
 
-    ::-moz-selection {
-      background: #292b2c;
-      color: #ddd;
+        <!-- Mobile header color for Chrome, Firefox OS and Opera -->
+        <meta name="theme-color" content="#292b2c" />
+        <!-- Mobile header color Windows Phone -->
+        <meta name="msapplication-navbutton-color" content="#292b2c" />
+        <!-- Mobile header color for iOS Safari (supports black, black-translucent or default) -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    </head>
+    <body>
+        <div class="lg:container lg:mx-auto bg-white p-4 h-screen">
+            <div class="form flex flex-wrap w-full absolute top-0 right-0">
+                <div class="w-full flex flex-wrap items-center justify-end">
+                    <div id="btn_setup" class="p-1 m-1">setup ▼</div>
+                    <div
+                        class="shadow-xl w-full flex flex-wrap items-center setup content collapsed bg-gray-100"
+                        id="setup-content"
+                    >
+                        <div class="w-full flex flex-wrap m-2 justify-end">
+                            <div class="py-1 px-3">
+                                <label for="lenght">length:</label>
+                                <input
+                                    class="len-input"
+                                    value="15"
+                                    type="text"
+                                    name="lenght"
+                                    id="lenght"
+                                    placeholder="lenght"
+                                />
+                            </div>
 
-    }
+                            <div class="py-1 px-3">
+                                <label for="symbols">use symbols?</label>
+                                <input type="checkbox" name="symbols" id="symbols" checked />
+                            </div>
+                            <div class="py-1 px-3">
+                                <label for="caps">use capital letters?</label>
+                                <input type="checkbox" name="caps" id="caps" checked />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    a:visited {
-      border-color: #f92672;
-    }
+            <div class="form flex flex-wrap w-full h-full m-auto">
+                <div class="w-full flex flex-wrap items-center justify-center flex-col lg:mb-44">
+                    <div class="p-2">
+                        <label for="seed">seed:</label>
+                        <input autocomplete="off" autofocus type="text" class="user-input" name="seed" id="seed" />
+                        <div class="text-xs gray-300 p-1">eg:user@service/rnd</div>
+                    </div>
 
-    .disclamer {
-      width: 50%;
-      margin: 10px;
-      padding: 10px;
-      border-left: 4px solid #292b2c;
-    }
+                    <div class="p-2">
+                        <label for="hidden-seed">hidden:</label>
+                        <input
+                            type="password"
+                            autocomplete="off"
+                            class="user-input"
+                            name="hidden-seed"
+                            id="hidden-seed"
+                        />
+                        <div class="relative float-right -ml-4 no-selection z-2" id="btn_peek">&#9675;</div>
 
-    .disclamer h1 {
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
+                        <div class="text-xs gray-300 p-1">master password</div>
+                    </div>
 
-    .disclamer p {
-      font-size: 0.8rem;
-    }
+                    <div class="p-2 items-center">
+                        <label for="new-pass">pass:</label>
+                        <input
+                            autocomplete="off"
+                            class="password-input"
+                            name="new-pass"
+                            id="new-pass"
+                            onClick="this.select();"
+                        />
+                        <div class="text-xs gray-300 p-1">new password</div>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 left-0 p-1 text-xs text-gray-500">Looking for the <a href="https://pass.luc.sh/v1">old version</a>?</div>
 
-    .disclamer span {
-      background: #292b2c;
-      color: #ddd;
-      padding: 1px;
-    }
-
-    .disclamer a {
-      text-decoration: none;
-      border: 0;
-      border-bottom: 2px solid #0773A7;
-      margin-left: 0;
-      padding: 0;
-      color: #292b2c;
-      background: none;
-    }
-
-    .disclamer a :visited {
-      border-color: #f92672;
-    }
-
-
-    .disclamer .contenido {
-      overflow: hidden;
-      transition: all 500ms ease-in;
-    }
-
-    .disclamer .contenido.collapsed {
-      max-height: 0px;
-    }
-
-    .disclamer .contenido.visible {
-      max-height: 500px;
-    }
-
-    a {
-      background: #292b2c;
-      border-left: 4px solid #0773A7;
-      color: #ddd;
-      margin-left: 10px;
-      padding: 10px;
-    }
-
-
-    hr {
-      border: 0;
-      height: 1px;
-      background: #292b2c;
-    }
-
-    form {
-      margin-bottom: 5px;
-    }
-
-    input {
-      font-size: 1rem;
-      font-family: Menlo, "Bitstream Vera Sans", "Courier New", courier, monospace;
-      font-weight: 100;
-      max-width: 250px;
-      border: 0;
-      border-bottom: solid 1px #292b2c;
-      border-radius: 0;
-    }
-
-    label {
-      background: #292b2c;
-      border-left: 4px solid #ddd;
-      color: #ddd;
-      margin-left: 0px;
-      padding: 10px;
-    }
-
-    table {
-      width: 100%;
-    }
-
-    td {
-      width: 50%;
-      padding: 5px 0;
-    }
-
-    input,
-    textarea,
-    select {
-      outline: 0;
-    }
-
-    .safari .user-input:hover,
-    .safari input:hover,
-    .safari textarea:hover,
-    .safari input:focus,
-    .safari textarea:focus {
-      margin-bottom: 1px !important;
-    }
-
-    input:hover,
-    textarea:hover,
-    input:focus,
-    textarea:focus {
-      border-bottom: solid 2px #292b2c;
-      margin-bottom: -1px;
-    }
-
-    table {
-      border-collapse: collapse;
-    }
-
-    table,
-    th,
-    td {
-      border: 0;
-    }
-
-    table.sitios tr {
-      min-height: 30px;
-    }
-
-    tr:hover,
-    tr:hover input {
-      background-color: #ddd;
-    }
-
-    .container {
-      max-width: 1024px;
-      margin: 0 auto;
-    }
-
-    .user-input,
-    .master-input {
-      max-width: 190px;
-    }
-
-    .password-input,
-    .custom-service {
-      width: 90%;
-      padding: 5px 0 5px 4px;
-    }
-
-    .password-input {
-      color: transparent;
-      text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .password-input:hover {
-      color: #292b2c;
-      text-shadow: none;
-    }
-
-    .show {
-      color: #292b2c;
-    }
-
-    .eye {
-      display: inline;
-      padding: 10px;
-      font-size: x-large;
-      color: #292b2c;
-      cursor: pointer;
-    }
-
-    .no-selection {
-      /* prevent selection */
-      -webkit-touch-callout: none;
-      /* iOS Safari */
-      -webkit-user-select: none;
-      /* Safari */
-      -khtml-user-select: none;
-      /* Konqueror HTML */
-      -moz-user-select: none;
-      /* Firefox */
-      -ms-user-select: none;
-      /* Internet Explorer/Edge */
-      user-select: none;
-      /* Non-prefixed version, currently supported by Chrome and Opera */
-    }
-
-    .column {
-      float: left;
-      width: 50%;
-      box-sizing: border-box
-    }
-
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
-    .padding-10 {
-      padding: 10px;
-    }
-
-    @media (max-width: 720px) {
-      .user-input,
-      .master-input {
-        max-width: 140px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .column.response {
-        width: 100%;
-      }
-      .user-input,
-      .master-input {
-        max-width: 165px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <form class="form">
-      <div class="row">
-        <div class="column response padding-10">
-          <label for="user">usr:</label>
-          <input type="text" class="user-input" name="user" placeholder="user@email.com">
+            </div>
         </div>
+        <div class="hidden lg:block max-w-xl absolute bottom-0 right-0 m-0 content" id="disclamer-container">
+            <div class="disclamer">
+                <div class="caja">
+                    <div class="caja-inner">
+                        <div class="w-full">
+                            <div class="ml-auto h-8 w-8 items-center justify-end flex" id="btn_close">[X]</div>
+                        </div>
+                        <h1>Secure Password Generator</h1>
+                        <h2>► Why?</h2>
 
-        <div class="column response padding-10">
-          <label for="password">psw:</label>
-          <input class="master-input" type="password" name="master" placeholder="password">
-          <div class="eye no-selection">&#9675;</div>
+                        <p>
+                            Using the same password for multiple accounts is very <span>unsafe</span>. If one of those
+                            sites gets compromised it will affect all your accounts, possibly even leading to identity
+                            theft.
+                        </p>
+                        <p>
+                            The idea behind this site it that you memorise just one, reasonably long, secure
+                            <span>master password</span>
+                            and use it to generate a set of non-dictionary complex passwords. This password generator
+                            works using JavaScript, entirely within the page and
+                            <span>no data is ever passed back to the server</span>.
+                        </p>
+                        <br />
+                        <p>
+                            The code is in
+                            <a href="https://github.com/lucsh/master-password">GitHub</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="column response padding-10">
-          <label for="lenght">len:</label>
-          <input class="user-input" value="15" type="text" name="lenght" placeholder="lenght">
-        </div>
-
-        <div class="column response padding-10">
-          <div class="column">
-            <label for="symbols">use syms?</label>
-            <input type="checkbox" name="symbols" checked>
-          </div>
-          <div class="column">
-            <label for="caps">use caps?</label>
-            <input type="checkbox" name="caps" checked>
-          </div>
-        </div>
-      </div>
-    </form>
-    <hr>
-    <form class="form row">
-      <div class="column">
-        <input class="custom-service" type="text" name="new-serv" placeholder="Custom Service">
-      </div>
-
-      <div class="column">
-        <input type="text" class="password-input" name="new-pass" value="" onClick="this.select();">
-      </div>
-    </form>
-    <table class="sitios">
-      <tr>
-        <td class="sitio"></td>
-        <td class="password"></td>
-      </tr>
-    </table>
-
-    <div class="disclamer column response">
-      <h1 id="btn_title">Why?</h1>
-      <div class="contenido collapsed">
-        <p>
-          Using the same password for multiple accounts is very
-          <span>unsafe</span>. If one of those sites gets compromised it will affect all your accounts, possibly even leading to
-          identity theft.
-        </p>
-        <p>The idea behind this site it that you memorise just one, reasonably long, secure
-          <span>master password</span> and use it to generate a set of non-dictionary complex passwords. This password generator
-          works using JavaScript, entirely within the page and
-          <span>no data is ever passed back to my server</span>.</p>
-        <p>The code is in
-          <a href="https://github.com/lucsh/master-password">GitHub</a>.
-        </p>
-      </div>
-    </div>
-  </div>
-</body>
-
+    </body>
 </html>
