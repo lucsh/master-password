@@ -1,12 +1,12 @@
 {
   "name": "masterpassword",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "JS MasterPassword inspired on https://ss64.com/pass/",
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/lucsh/master-password/"
   },
   "license": "MIT",
   "author": "lucsh",

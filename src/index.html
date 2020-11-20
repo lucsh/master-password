@@ -10,9 +10,9 @@
         <meta property="og:title" content="A simple secure password generator" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://pass.luc.sh" />
-<!--        <meta property="og:image" content="https://site.com/imageforfacebook.jpg" />-->
-<!--        <meta property="og:image:alt" content="an image to show on facebook links" />-->
-<!--        <meta property="og:description" content="A simple description" />-->
+        <!--        <meta property="og:image" content="https://site.com/imageforfacebook.jpg" />-->
+        <!--        <meta property="og:image:alt" content="an image to show on facebook links" />-->
+        <!--        <meta property="og:description" content="A simple description" />-->
 
         <!-- Twitter Card data -->
         <meta name="twitter:card" content="summary" />
@@ -61,6 +61,10 @@
             </div>
 
             <div class="form flex flex-wrap w-full h-full m-auto">
+                <div class="flex flex-wrap absolute bottom-0 left-0 m-6 text-xs text-gray-500">
+                    <div class="p-1">&gt; Looking for the <a href="https://pass.luc.sh/v1">old version</a>?</div>
+                    <div class="p-1">&gt; Or perhaps the <a href="https://luc.sh/files/spg.sh">bash version</a>?</div>
+                </div>
                 <div class="w-full flex flex-wrap items-center justify-center flex-col lg:mb-44">
                     <div class="p-2">
                         <label for="seed">seed:</label>
@@ -94,8 +98,6 @@
                         <div class="text-xs gray-300 p-1">new password</div>
                     </div>
                 </div>
-                <div class="absolute bottom-0 left-0 p-1 text-xs text-gray-500">Looking for the <a href="https://pass.luc.sh/v1">old version</a>?</div>
-
             </div>
         </div>
         <div class="hidden lg:block max-w-xl absolute bottom-0 right-0 m-0 content" id="disclamer-container">
@@ -106,7 +108,7 @@
                             <div class="ml-auto h-8 w-8 items-center justify-end flex" id="btn_close">[X]</div>
                         </div>
                         <h1>Secure Password Generator</h1>
-                        <h2>► Why?</h2>
+                        <h2>&gt; why?</h2>
 
                         <p>
                             Using the same password for multiple accounts is very <span>unsafe</span>. If one of those
@@ -116,8 +118,8 @@
                         <p>
                             The idea behind this site it that you memorise just one, reasonably long, secure
                             <span>master password</span>
-                            and use it to generate a set of non-dictionary complex passwords. This password generator
-                            works using JavaScript, entirely within the page and
+                            and use it to generate non-dictionary complex passwords. This password generator works using
+                            JavaScript, entirely within the page and
                             <span>no data is ever passed back to the server</span>.
                         </p>
                         <br />

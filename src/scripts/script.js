@@ -35,9 +35,7 @@ function getPass(seed, hidden) {
         const vocales = prepass.match(/[aeiou]/gi);
 
         const syms = '{!#$%&()*+,-./:;<=>?@[{}]^_|~}';
-
-        const index = Math.round((vocales.length / 100) * syms.length);
-
+        const index = Math.round((vocales.length * syms.length) / 100);
         prepass =
             prepass.slice(0, len / 3) +
             syms[index] +
@@ -62,6 +60,21 @@ function getNewPass() {
     }
 }
 
+function greet() {
+    console.log(`
+      #####  ######   #####  
+     #     # #     # #     # 
+     #       #     # #       
+      #####  ######  #  #### 
+           # #       #     # 
+     #     # #       #     # 
+      #####  #        #####  
+                              
+    https://github.com/lucsh/master-password
+    https://luc.sh
+    `);
+}
+
 function showPassword() {
     hiddenSeed.type = 'text';
     this.innerHTML = '&#9675;';
@@ -82,9 +95,6 @@ function showSetupContent() {
 }
 
 function showDisclamerContent() {
-    console.log('asd');
-
-    // disclamerContainer.classList.toggle('hidden');
     disclamerContainer.classList.toggle('collapsed');
 }
 
@@ -103,6 +113,7 @@ hiddenSeed.addEventListener('input', getNewPass);
 btnPeek.addEventListener('mousedown', showPassword);
 btnPeek.addEventListener('mouseup', hidePassword);
 
+greet();
 getNewPass();
 
 //btnClose
