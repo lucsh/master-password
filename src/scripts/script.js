@@ -43,10 +43,19 @@ function getPass(seed, hidden) {
             syms[index + 2] +
             prepass.slice((len * 2) / 3, len);
     }
+    let middle = prepass.slice(len / 3, (len * 2) / 3)
     if (useCaps.checked) {
+        if (middle.substring(1,len / 3).match(/^[0-9]+$/) != null){
+            //#$4237 => $A23L
+            const letters="IDKFAHOLYV"
+            const posa=middle[1]
+            const posb=middle.slice(-1)
+             middle=`${middle[0]}${letters[posa]}${middle.substring(1,middle.length-2)}${letters[posb]}`
+        }
+
         prepass =
             prepass.slice(0, len / 3) +
-            prepass.slice(len / 3, (len * 2) / 3).toUpperCase() +
+            middle +
             prepass.slice((len * 2) / 3, len);
     }
     contrasena = prepass.slice(0, len);
