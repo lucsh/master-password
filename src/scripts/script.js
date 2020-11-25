@@ -55,7 +55,7 @@ function getPass(seed, hidden) {
 
         prepass =
             prepass.slice(0, len / 3) +
-            middle +
+            middle.toUpperCase() +
             prepass.slice((len * 2) / 3, len);
     }
     contrasena = prepass.slice(0, len);
