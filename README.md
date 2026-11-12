@@ -32,7 +32,9 @@ the service worker last. It preserves the root permissions, existing hosting
 configuration, legacy `v1/`, and old hashed assets. It never deletes remote files.
 
 The script adds a scoped revalidation rule for HTML and the service worker to
-avoid the existing month-long cache default. The original `.htaccess` is included
+avoid the existing month-long cache default. Fingerprinted main/vendor/style
+CSS and JavaScript bundles use one-year immutable caching; unversioned assets
+retain their existing policy. The original `.htaccess` is included
 in the backup. The remote release path is saved in `.release/latest-remote.txt`;
 run `bash <release-path>/rollback.sh` over SSH to restore the previous site.
 Verify the live HTML checksum and referenced assets after each deployment.

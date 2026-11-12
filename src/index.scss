@@ -74,11 +74,10 @@ footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
 .skip-link:focus { top: 12px; }
 @media (max-width: 600px) {
     .header { min-height: 64px; }
-    .theme-control label { display: none; }
     main { padding: 20px 0 16px; }
     .intro .eyebrow, .intro .description { display: none; }
-    /* Retain the page heading for screen readers without occupying form space. */
-    .intro h1 { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    /* Keep the heading and theme label accessible without occupying mobile space. */
+    .intro h1, .theme-control label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     .field { margin-bottom: 16px; }
     .field > label, .result > label { margin-bottom: 6px; }
     .hint { margin-top: 5px; }

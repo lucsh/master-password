@@ -54,6 +54,20 @@ if ! grep -q 'BEGIN master-password release cache' "$root/.htaccess"; then
 # END master-password release cache
 CACHE
 fi
+# Only content-hashed bundles are immutable; unversioned files keep their policy.
+if ! grep -q 'BEGIN master-password immutable assets' "$root/.htaccess"; then
+  cat >> "$root/.htaccess" <<'CACHE'
+
+# BEGIN master-password immutable assets
+<IfModule mod_headers.c>
+  <FilesMatch "^(main|vendor|style)\.[a-f0-9]{8,}\.(js|css)(\.gz)?$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header unset Expires
+  </FilesMatch>
+</IfModule>
+# END master-password immutable assets
+CACHE
+fi
 for file in index.html.gz index.html sw.js; do
   [[ -f "$release/site/$file" ]] || continue
   cp "$release/site/$file" "$root/.$file.next"
