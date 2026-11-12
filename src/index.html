@@ -1,135 +1,76 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Secure Password</title>
+        <title>Master Password — luc.sh</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="Description" content="A simple secure password generator" />
-
-        <!-- Open Graph data / Facebook Card data -->
-        <meta property="og:title" content="A simple secure password generator" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://pass.luc.sh" />
-        <!--        <meta property="og:image" content="https://site.com/imageforfacebook.jpg" />-->
-        <!--        <meta property="og:image:alt" content="an image to show on facebook links" />-->
-        <!--        <meta property="og:description" content="A simple description" />-->
-
-        <!-- Twitter Card data -->
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:creator" content="@closerluc" />
-
-        <!-- Mobile header color for Chrome, Firefox OS and Opera -->
-        <meta name="theme-color" content="#292b2c" />
-        <!-- Mobile header color Windows Phone -->
-        <meta name="msapplication-navbutton-color" content="#292b2c" />
-        <!-- Mobile header color for iOS Safari (supports black, black-translucent or default) -->
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="description" content="Generate repeatable passwords locally in your browser." />
+        <meta name="theme-color" content="#f4f4ed" />
+        <script>
+            (function () {
+                var preference = 'system';
+                try { preference = localStorage.getItem('password-theme') || 'system'; } catch (_) {}
+                var dark = preference === 'dark' || (preference !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+                document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+                document.querySelector('meta[name="theme-color"]').content = dark ? '#181a17' : '#f4f4ed';
+            }());
+        </script>
     </head>
     <body>
-        <div class="lg:container lg:mx-auto bg-white p-4 h-screen">
-            <div class="form flex flex-wrap w-full absolute top-0 right-0">
-                <div class="w-full flex flex-wrap items-center justify-end">
-                    <div id="btn_setup" class="p-1 m-1">setup ▼</div>
-                    <div
-                        class="shadow-xl w-full flex flex-wrap items-center setup content collapsed bg-gray-100"
-                        id="setup-content"
-                    >
-                        <div class="w-full flex flex-wrap m-2 justify-end">
-                            <div class="py-1 px-3">
-                                <label for="lenght">length:</label>
-                                <input
-                                    class="len-input"
-                                    value="15"
-                                    type="text"
-                                    name="lenght"
-                                    id="lenght"
-                                    placeholder="lenght"
-                                />
-                            </div>
-
-                            <div class="py-1 px-3">
-                                <label for="symbols">use symbols?</label>
-                                <input type="checkbox" name="symbols" id="symbols" checked />
-                            </div>
-                            <div class="py-1 px-3">
-                                <label for="caps">use capital letters?</label>
-                                <input type="checkbox" name="caps" id="caps" checked />
-                            </div>
+        <a class="skip-link" href="#main">Skip to generator</a>
+        <div class="shell">
+            <header class="header">
+                <a class="wordmark" href="https://luc.sh" aria-label="luc.sh home">luc<span>.</span>sh</a>
+                <div class="theme-control">
+                    <label for="theme">Appearance</label>
+                    <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select>
+                </div>
+            </header>
+            <main id="main">
+                <div class="intro">
+                    <p class="eyebrow">A small tool / luc.sh</p>
+                    <h1>Master password<span>.</span></h1>
+                    <p class="description">One secret. A password for every account.</p>
+                </div>
+                <form class="generator" autocomplete="off">
+                    <div class="field">
+                        <label for="seed">Seed / account identifier</label>
+                        <input type="text" name="seed" id="seed" spellcheck="false" autocapitalize="none" aria-describedby="seed-help" />
+                        <p class="hint" id="seed-help">For example, user@service/rnd. Use exactly the same text each time.</p>
+                    </div>
+                    <div class="field">
+                        <label for="hidden-seed">Master password</label>
+                        <div class="input-action">
+                            <input type="password" name="hidden-seed" id="hidden-seed" spellcheck="false" aria-describedby="master-help" />
+                            <button type="button" id="btn_peek" aria-controls="hidden-seed" aria-pressed="false">Show</button>
                         </div>
+                        <p class="hint" id="master-help">Your remembered secret. It stays in this page.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="form flex flex-wrap w-full h-full m-auto">
-                <div class="flex flex-wrap absolute bottom-0 left-0 m-6 text-xs text-gray-500">
-                    <div class="p-1">&gt; Looking for the <a href="https://pass.luc.sh/v1">old version</a>?</div>
-                    <div class="p-1">&gt; Or perhaps the <a href="https://luc.sh/files/spg.sh">bash version</a>?</div>
-                </div>
-                <div class="w-full flex flex-wrap items-center justify-center flex-col lg:mb-44">
-                    <div class="p-2">
-                        <label for="seed">seed:</label>
-                        <input autocomplete="off" autofocus type="text" class="user-input" name="seed" id="seed" />
-                        <div class="text-xs gray-300 p-1">eg:user@service/rnd</div>
-                    </div>
-
-                    <div class="p-2">
-                        <label for="hidden-seed">hidden:</label>
-                        <input
-                            type="password"
-                            autocomplete="off"
-                            class="user-input"
-                            name="hidden-seed"
-                            id="hidden-seed"
-                        />
-                        <div class="relative float-right -ml-4 no-selection z-2" id="btn_peek">&#9675;</div>
-
-                        <div class="text-xs gray-300 p-1">master password</div>
-                    </div>
-
-                    <div class="p-2 items-center">
-                        <label for="new-pass">pass:</label>
-                        <input
-                            autocomplete="off"
-                            class="password-input"
-                            name="new-pass"
-                            id="new-pass"
-                            onClick="this.select();"
-                        />
-                        <div class="text-xs gray-300 p-1">new password</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hidden lg:block max-w-xl absolute bottom-0 right-0 m-0 content" id="disclamer-container">
-            <div class="disclamer">
-                <div class="caja">
-                    <div class="caja-inner">
-                        <div class="w-full">
-                            <div class="ml-auto h-8 w-8 items-center justify-end flex" id="btn_close">[X]</div>
+                    <details class="options">
+                        <summary>Password options <span id="options-summary">15 characters · Aa · Symbols</span></summary>
+                        <div class="options-body">
+                            <div class="length-control"><label for="lenght">Length</label><input type="number" value="15" min="1" max="64" step="1" required name="lenght" id="lenght" aria-describedby="length-error" /></div>
+                            <label class="check"><input type="checkbox" name="symbols" id="symbols" checked /> Symbols</label>
+                            <label class="check"><input type="checkbox" name="caps" id="caps" checked /> Capital letters</label>
+                            <p id="length-error" class="error" aria-live="polite"></p>
                         </div>
-                        <h1>Secure Password Generator</h1>
-                        <h2>&gt; why?</h2>
-
-                        <p>
-                            Using the same password for multiple accounts is very <span>unsafe</span>. If one of those
-                            sites gets compromised it will affect all your accounts, possibly even leading to identity
-                            theft.
-                        </p>
-                        <p>
-                            The idea behind this site it that you memorise just one, reasonably long, secure
-                            <span>master password</span>
-                            and use it to generate non-dictionary complex passwords. This password generator works using
-                            JavaScript, entirely within the page and
-                            <span>no data is ever passed back to the server</span>.
-                        </p>
-                        <br />
-                        <p>
-                            The code is in
-                            <a href="https://github.com/lucsh/master-password">GitHub</a>.
-                        </p>
+                    </details>
+                    <div class="result">
+                        <label for="new-pass">Generated password</label>
+                        <div class="input-action">
+                            <input type="password" name="new-pass" id="new-pass" readonly spellcheck="false" placeholder="Your password appears here" />
+                            <button type="button" id="btn_result_peek" aria-controls="new-pass" aria-pressed="false">Show</button>
+                        </div>
+                        <button class="copy" type="button" id="btn_copy" disabled>Copy password <span aria-hidden="true">↗</span></button>
+                        <p class="status" id="copy-status" role="status" aria-live="polite"></p>
                     </div>
+                </form>
+                <div class="help">
+                    <p class="local-note"><span aria-hidden="true">●</span> Generated locally in your browser.</p>
+                    <details><summary>How it works</summary><div class="help-body"><p>Your seed, master password, and options produce a repeatable password. Keep all three the same to reproduce it, including spaces and capitalization.</p><p>The generator runs in this page. Your inputs and generated passwords are not saved by the app or sent to a server. Only your appearance preference is remembered.</p><p>Changing options changes your password; it does not update the password on the service you use. Keep your master password private.</p></div></details>
                 </div>
-            </div>
+            </main>
+            <footer><span>A tool by <a href="https://luc.sh">luc.sh ↗</a></span><nav aria-label="Resources"><a href="https://github.com/lucsh/master-password">Source ↗</a><a href="https://pass.luc.sh/v1">Old version ↗</a><a href="https://luc.sh/files/spg.sh">Bash version ↗</a></nav></footer>
         </div>
     </body>
 </html>
