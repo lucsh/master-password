@@ -41,7 +41,7 @@ h1 { font-family: Arial, Helvetica, sans-serif; font-size: clamp(36px, 7vw, 48px
 .description { color: var(--muted); margin: 0 0 36px; }
 .field { margin-bottom: 24px; }
 .field > label, .result > label { display: block; margin-bottom: 9px; }
-input[type='text'], input[type='password'], input[type='number'] { width: 100%; min-width: 0; padding: 13px 14px; min-height: 48px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+input:not([type]), input[type='text'], input[type='password'], input[type='number'] { width: 100%; min-width: 0; padding: 13px 14px; min-height: 48px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
 input::placeholder { color: var(--muted); font-size: 11px; opacity: 1; }
 .input-action { display: flex; }
 .input-action input { border-radius: 2px 0 0 2px; }
